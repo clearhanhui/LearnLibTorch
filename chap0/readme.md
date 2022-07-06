@@ -1,17 +1,17 @@
-- [LibTorch Installation](#libtorch-installation)
-    - [1. 首先安装PyTorch](#1-首先安装pytorch)
-    - [2. 下载解压LibTorch](#2-下载解压libtorch)
+- [LibTorch 安装](#libtorch-安装)
+    - [1. 首先安装 PyTorch](#1-首先安装-pytorch)
+    - [2. 下载解压 LibTorch](#2-下载解压-libtorch)
     - [3. 配置环境](#3-配置环境)
 
-# LibTorch Installation
+# LibTorch 安装
 
-### 1. 首先安装PyTorch
+### 1. 首先安装 PyTorch
 
 ```bash
 pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cpu
 ```
 
-### 2. 下载解压LibTorch
+### 2. 下载解压 LibTorch
 
 ```bash
 wget https://download.pytorch.org/libtorch/nightly/cpu/libtorch-shared-with-deps-latest.zip

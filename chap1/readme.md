@@ -60,4 +60,4 @@ make
 Welcome to LibTorch!
 ```
 
-> 大坑：执行 `cmake ..` 的时候一直报错找不到 `TorchConfig.cmake` ，[cmake官方文档](https://cmake.org/cmake/help/latest/command/find_package.html)对 `find_package()` 的解释是在 3.12 之后可以通过 `<PackageName>_ROOT` 变量查找，我的cmake是通过 `apt install cmake` 安装的 3.18，按理说配置应该没问题，也可以通过 `-DCMAKE_PREFIX_PATH=/path/to/libtorch` 编译通过，说明 `libtorch` 没问题百思不得其解。最后无奈从官网手动下载了 3.23 竟然可以了。
+> 大坑：执行 `cmake ..` 的时候一直报错找不到 `TorchConfig.cmake` ，`find_package()` [官方文档](https://cmake.org/cmake/help/latest/command/find_package.html)是在说明 3.12 之后的版本可以通过 `<PackageName>_ROOT` 变量查找，我是通过 `apt install cmake` 安装的 3.18，按理说版本应该没问题，也可以通过 `-DCMAKE_PREFIX_PATH=/path/to/libtorch` 编译通过，说明 `libtorch` 没问题百思不得其解。最后无奈从官网手动下载了 3.23 竟然可以了。
