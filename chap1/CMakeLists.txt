@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.21)
 project(HelloWorld)
 
-set(Torch_ROOT /home/clear/libtorch)
 find_package(Torch REQUIRED)
 
 add_executable(${PROJECT_NAME} HelloWorld.cpp)
