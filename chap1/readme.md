@@ -1,9 +1,9 @@
-- [LibTorch Hello World](#libtorch-hello-world)
+- [LibTorch HelloWorld](#libtorch-helloworld)
   - [1. 创建 CMake 项目](#1-创建-cmake-项目)
   - [2. 编写 HelloWorld.cpp](#2-编写-helloworldcpp)
   - [3. 编译运行](#3-编译运行)
 
-# LibTorch Hello World
+# LibTorch HelloWorld
 
 ## 1. 创建 CMake 项目
 
@@ -59,4 +59,4 @@ make
 Welcome to LibTorch!
 ```
 
-> **大坑**：执行 `cmake ..` 的时候一直报错找不到 `TorchConfig.cmake` ，`find_package()` [官方文档](https://cmake.org/cmake/help/latest/command/find_package.html)是在说明 3.12 之后的版本可以通过 `<PackageName>_ROOT` 变量查找，我是通过 `apt` 命令安装的 3.18，按理说版本应该没问题，也可以通过 `-DCMAKE_PREFIX_PATH=/path/to/libtorch` 编译通过，说明 `libtorch` 没问题，百思不得其解，最后无奈从官网手动下载了 3.23 竟然可以了。
+> **大坑**：执行 `cmake ..` 的时候一直报错找不到 `TorchConfig.cmake`，但可以通过 `-DCMAKE_PREFIX_PATH=/path/to/libtorch` 编译通过，说明 `libtorch` 没问题。我是通过 `apt` 命令安装的 3.18，`find_package()` [官方文档](https://cmake.org/cmake/help/latest/command/find_package.html)上面说 3.12 之后的版本可以通过 `<PackageName>_ROOT` 变量查找，按理说版本应该没问题，百思不得其解，最后无奈从官网手动下载了 3.23 竟然可以了。

@@ -49,6 +49,8 @@ def tensor_attribute():
     print(a.size(1))
     print(a.shape)
     print(a[0].shape)
+    print(a[0][0].item())
+    print(a.data)
     print(a.dtype)
     print(a.device)
 

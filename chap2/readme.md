@@ -39,19 +39,21 @@ torch::Tensor f = a.index_select(-1, torch::tensor({1, 1, 0}));
 ```
 
 ## 3. 张量属性
-除了 `shape` 属性变味了 `sizes()` 函数，其余常用的基本上和 python 一致。
+除了 `shape` 属性变味了 `sizes()` 函数，item其余常用的基本上和 python 一致。
 ```cpp
 torch::Tensor a = torch::randn({2, 3});
 std::cout << a.size(1) << std::endl;
 std::cout << a.sizes() << std::endl;
 std::cout << a[0].sizes() << std::endl;
+std::cout << a[0][0].item<float>() << std::endl;
+std::cout << a.data() << std::endl;
 std::cout << a.dtype() << std::endl;
 std::cout << a.device() << std::endl;
 ```
 
 ## 4. 张量变换
 
-不支持 Tensor.T 的操作，另外 `transpose()` 函数的用法也与 python 稍有区别。
+不支持形如 Tensor.T 的操作，另外 `transpose()` 函数的用法也与 python 稍有区别。
 ```cpp
 torch::Tensor a = torch::randn({2, 3});
 torch::Tensor b = a.transpose(0, 1);
