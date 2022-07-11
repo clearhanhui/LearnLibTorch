@@ -1,8 +1,13 @@
-#include "include/CNN.h"
-#include "include/LR.h"
-#include "include/MLP.h"
-#include "include/data.h"
+/*
+ * @File    :   LR.cpp
+ * @Time    :   2022/07/11
+ * @Author  :   Han Hui
+ * @Contact :   clearhanhui@gmail.com
+ */
 
+// #include "include/CNN.h"
+#include "include/CNN.h"
+#include "include/MLP.h"
 #include <iostream>
 #include <torch/torch.h>
 
@@ -15,12 +20,50 @@ int main() {
 
   torch::Tensor img0 = torch::randn({10, 1, 28, 28}) * 100 + 100;
   torch::Tensor label0 = torch::zeros({10}, torch::kLong);
-  torch::Tensor img1 = torch::randn({10, 1, 28, 38}) * 100 + 150;
+  torch::Tensor img1 = torch::randn({10, 1, 28, 28}) * 100 + 150;
   torch::Tensor label1 = torch::ones({10}, torch::kLong);
   torch::Tensor img = torch::cat({img0, img1});
   torch::Tensor label = torch::cat({label0, label1});
 
-  //
+  // 线性回归
+  std::cout << "\n============= train_lr  ==============\n";
+  torch::nn::Linear lin(2, 1);
+  torch::optim::SGD sgd(lin->parameters(), 0.1);
+  for (int i = 0; i < 10; i++) {
+    torch::Tensor y_ = lin(x);
+    torch::Tensor loss = torch::mse_loss(y_, y);
+    sgd.zero_grad();
+    loss.backward();
+    sgd.step();
+    std::cout << "Epoch " << i << " loss=" << loss.item() << std::endl;
+  }
+
+  //多层感知机
+  std::cout << "\n============= train_mlp ==============\n";
+  MLP mlp(x.size(1), 4, 1);
+  torch::optim::RMSprop rms_prop(mlp.parameters(), 0.1);
+  for (int i = 0; i < 10; i++) {
+    torch::Tensor y_ = mlp.forward(x);
+    torch::Tensor loss = torch::mse_loss(y_, y);
+    rms_prop.zero_grad();
+    loss.backward();
+    rms_prop.step();
+    std::cout << "Epoch " << i << " loss=" << loss.item() << std::endl;
+  }
+
+  // 卷积网络
+  std::cout << "\n============= train_cnn ==============\n";
+  CNN cnn(2);
+  torch::optim::Adam adam(cnn.parameters(), 0.01);
+  torch::nn::CrossEntropyLoss cross_entropy;
+  for (int i = 0; i < 10; i++) {
+    torch::Tensor label_ = cnn.forward(img);
+    torch::Tensor loss = cross_entropy(label_, label);
+    adam.zero_grad();
+    loss.backward();
+    adam.step();
+    std::cout << "Epoch " << i << " loss=" << loss.item() << std::endl;
+  }
 
   return 0;
 }

@@ -32,15 +32,15 @@ label = torch.cat([label0, label1])
 def train_lr(x, y):
     lin = torch.nn.Linear(2, 1)
     loss_fn = torch.nn.MSELoss()
-    optimizer = torch.optim.SGD(lin.parameters(), lr=0.1)
+    sgd = torch.optim.SGD(lin.parameters(), lr=0.1)
 
     for i in range(10):
         y_ = lin(x)
         loss = loss_fn(y_, y)
-        optimizer.zero_grad()
+        torch.slogdet.zero_grad()
         loss.backward()
-        optimizer.step()
-        print("Epoch [{:0>2d}]  loss={:.4f}]".format(i, loss.item()))
+        sgd.step()
+        print("Epoch [{:0>2d}]  loss={:.4f}".format(i, loss.item()))
 
 
 # 非线性激活的多层感知机，三层
@@ -62,16 +62,16 @@ def train_mlp(x, y):
             return x
 
     mlp = MLP(x.shape[1], 4, 1)
-    optimizer = torch.optim.RMSprop(mlp.parameters(), lr=0.1)
+    rms_prop = torch.optim.RMSprop(mlp.parameters(), lr=0.1)
     loss_fn = torch.nn.MSELoss()
 
     for i in range(10):
         y_ = mlp(x)
         loss = loss_fn(y_, y)
-        optimizer.zero_grad()
+        rms_prop.zero_grad()
         loss.backward()
-        optimizer.step()
-        print("Epoch [{:0>2d}]  loss={:.4f}]".format(i, loss.item()))
+        rms_prop.step()
+        print("Epoch [{:0>2d}]  loss={:.4f}".format(i, loss.item()))
 
 
 # 2层 卷积网络
@@ -80,10 +80,10 @@ def train_cnn(img, label):
         def __init__(self, num_classes):
             super().__init__()
 
-            self.conv1 = torch.nn.Conv2d(1, 16, kernel_size=3, padding=1)
-            self.conv2 = torch.nn.Conv2d(16, 16, kernel_size=3, padding=1)
+            self.conv1 = torch.nn.Conv2d(1, 16, 3, padding=1)
+            self.conv2 = torch.nn.Conv2d(16, 16, 3, padding=1)
             self.bn = torch.nn.BatchNorm2d(16)
-            self.max_pool = torch.nn.MaxPool2d(kernel_size=2, stride=2)
+            self.max_pool = torch.nn.MaxPool2d(2)
             self.relu = torch.nn.ReLU()
             self.lin = torch.nn.Linear(7*7*16, num_classes)
 
@@ -103,15 +103,15 @@ def train_cnn(img, label):
 
     cnn = CNN(2)
     loss_fn = torch.nn.CrossEntropyLoss()
-    optimizer = torch.optim.Adam(cnn.parameters(), lr=0.01)
+    adam = torch.optim.Adam(cnn.parameters(), lr=0.01)
 
     for i in range(10):
         label_ = cnn(img)
         loss = loss_fn(label_, label)
-        optimizer.zero_grad()
+        adam.zero_grad()
         loss.backward()
-        optimizer.step()
-        print("Epoch [{:0>2d}]  loss={:.4f}]".format(i, loss.item()))
+        adam.step()
+        print("Epoch [{:0>2d}]  loss={:.4f}".format(i, loss.item()))
 
 
 if __name__ == "__main__":
