@@ -16,7 +16,7 @@ find_package(Torch REQUIRED)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
 
 add_executable(HelloWorld HelloWorld.cpp)
-target_link_libraries(HelloWorld "${TORCH_LIBRARIES}")
+target_link_libraries(HelloWorld ${TORCH_LIBRARIES})
 set_property(TARGET HelloWorld PROPERTY CXX_STANDARD 14)
 ```
 
@@ -59,4 +59,4 @@ make
 Welcome to LibTorch!
 ```
 
-> **大坑**：执行 `cmake ..` 的时候一直报错找不到 `TorchConfig.cmake`，但可以通过 `-DCMAKE_PREFIX_PATH=/path/to/libtorch` 编译通过，说明 `libtorch` 没问题。我是通过 `apt` 命令安装的 3.18，`find_package()` [官方文档](https://cmake.org/cmake/help/latest/command/find_package.html)上面说 3.12 之后的版本可以通过 `<PackageName>_ROOT` 变量查找，按理说版本应该没问题，百思不得其解，最后无奈从官网手动下载了 3.23 竟然可以了。
+> **大坑**：执行 `cmake ..` 的时候一直报错找不到 `TorchConfig.cmake`，但可以通过 `-DCMAKE_PREFIX_PATH=/path/to/libtorch` 编译通过，说明 LibTorch 没问题。我是通过 `apt` 命令安装的 3.18，`find_package()` [官方文档](https://cmake.org/cmake/help/latest/command/find_package.html)上面说 3.12 之后的版本可以通过 `<PackageName>_ROOT` 变量查找，按理说版本应该没问题，百思不得其解，最后无奈从官网手动下载了 3.23 竟然可以了。

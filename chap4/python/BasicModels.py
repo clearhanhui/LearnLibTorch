@@ -7,15 +7,12 @@
 @Contact :   clearhanhui@gmail.com
 '''
 
-from turtle import forward
-from numpy import dtype
 import torch
-import matplotlib.pyplot as plt
 
 # 生成线性数据
 w = torch.tensor([[1.0, 2.0]])
-x = torch.rand((10, 2))
-b = torch.randn((10, 1)) + 3
+x = torch.rand((20, 2))
+b = torch.randn((20, 1)) + 3
 y = x.mm(w.t()) + b
 
 # 生成图像数据
@@ -27,7 +24,6 @@ img = torch.cat([img0, img1])# .clamp(0, 255)
 label = torch.cat([label0, label1])
 
 
-
 # 线性回归
 def train_lr(x, y):
     lin = torch.nn.Linear(2, 1)
@@ -37,7 +33,7 @@ def train_lr(x, y):
     for i in range(10):
         y_ = lin(x)
         loss = loss_fn(y_, y)
-        torch.slogdet.zero_grad()
+        sgd.zero_grad()
         loss.backward()
         sgd.step()
         print("Epoch [{:0>2d}]  loss={:.4f}".format(i, loss.item()))

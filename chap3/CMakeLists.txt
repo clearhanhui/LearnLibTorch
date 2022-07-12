@@ -3,4 +3,4 @@ project(AutoGrad)
 
 find_package(Torch REQUIRED)
 add_executable(AutoGrad AutoGrad.cpp)
-target_link_libraries(AutoGrad "${TORCH_LIBRARIES}")
+target_link_libraries(AutoGrad ${TORCH_LIBRARIES})

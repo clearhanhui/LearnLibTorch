@@ -14,7 +14,8 @@
 * [0--LibTorch 配置](./chap0/)
 * [1--LibTorch HelloWorld](./chap1/)
 * [2--张量基础](./chap2/)
-* [3--自动微分](./chap3)
+* [3--自动微分](./chap3/)
+* [4--基本模型](./chap4/build/CMakeFiles/3.23.2/CompilerIdC/CMakeCCompilerId.c)
 
 
 ## 

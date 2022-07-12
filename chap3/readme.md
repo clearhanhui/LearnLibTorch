@@ -1,6 +1,6 @@
 - [自动微分](#自动微分)
   - [1. 普通微分](#1-普通微分)
-  - [2. vector-Jacobian product](#2-vector-jacobian-product)
+  - [2. vector-Jacobian product(vjp)](#2-vector-jacobian-productvjp)
 # 自动微分
 
 ## 1. 普通微分
@@ -34,7 +34,7 @@ std::cout << x.requires_grad() << std::endl;
 ```
 > 注意：libtorch 默认不保留计算图，如果想要得到正确的结果需要第一次计算梯度时候设置相关参数，并且清除已有梯度。
 
-## 2. vector-Jacobian product
+## 2. vector-Jacobian product(vjp)
 雅可比矩阵 $J$ 计算的是向量 $y$ 对于向量 $w$ 的导数，这里假设向量 $w=[w_1, w_2, w_3]$ 是当前某个中间层的权重，$y=[y_1, y_2, y_3]$ 由 $w$ 经过某个可导函数产生。反向传播的时候，实际的梯度向量就是本层的导数 $J$ 与上层的梯度向量 $v$ 的乘积。
 
 对于 $y = x^2+2x$，雅可比矩阵为：

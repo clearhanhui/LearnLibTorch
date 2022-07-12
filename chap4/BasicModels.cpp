@@ -14,8 +14,8 @@
 int main() {
   // 生成数据
   torch::Tensor w = torch::tensor({{1.0, 2.0}});
-  torch::Tensor x = torch::rand({10, 2});
-  torch::Tensor b = torch::randn({10, 1}) + 3;
+  torch::Tensor x = torch::rand({20, 2});
+  torch::Tensor b = torch::randn({20, 1}) + 3;
   torch::Tensor y = x.mm(w.t()) + b;
 
   torch::Tensor img0 = torch::randn({10, 1, 28, 28}) * 100 + 100;
