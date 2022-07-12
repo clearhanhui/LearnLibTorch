@@ -13,7 +13,7 @@
 
 ## 1. 创建张量
 
-和 python 相比不能说一模一样，只能说极为相似。
+和 PyTorch 相比不能说一模一样，只能说极为相似。
 
 ```cpp
 torch::Tensor a = torch::zeros({2, 3});
@@ -39,7 +39,7 @@ torch::Tensor f = a.index_select(-1, torch::tensor({1, 1, 0}));
 ```
 
 ## 3. 张量属性
-除了 `shape` 属性变味了 `sizes()` 函数，item其余常用的基本上和 python 一致。
+除了 `shape` 属性变味了 `sizes()` 函数，item其余常用的基本上和 PyTorch 一致。
 ```cpp
 torch::Tensor a = torch::randn({2, 3});
 std::cout << a.size(1) << std::endl;
@@ -64,7 +64,7 @@ torch::Tensor e = a.toType(torch::kFloat32);
 
 ## 5. 张量计算
 
-基本与 python 一致。
+基本与 PyTorch 一致。
 ```cpp
 torch::Tensor a = torch::ones({3, 3});
 torch::Tensor b = torch::randn({3, 3});
@@ -77,4 +77,4 @@ torch::Tensor f = torch::stack({a, b});
 ## 6. CUDA
 留坑。
 
-LibTorch 大部分 api 和 python 都基本一致，稍加熟悉就可以了。
+LibTorch 大部分 api 和 PyTorch 都基本一致，稍加熟悉就可以了。
