@@ -59,7 +59,7 @@ torch::nn::Linear lin_no_bias(torch::nn::LinearOptions(2,1).bias(false));
 
 > 注意2： `torch::nn::Linear` 会声明**一个经由封装过的指针，而不是对象**，所以语法上调用 `forward()` 或者 `parameters()` 函数的时候用 `->` 而不是 `.` ，在 [include](./include/) 目录中也实现了对应的 LR 类，可以应用 `.` 调用相关方法。
 
-> 注意3：在 LibTorch 中可以像 PyTorch 语法那样直接通过形如 `lin(x)` 方式前向传播。PyTorch 中是因为在 `__call__()` 函数中调用了 `forward()` ,LibTorch 是因为重写了运算符 `()`。
+> 注意3：在 LibTorch 中可以像 PyTorch 语法那样直接通过形如 `lin(x)` 方式前向传播（仅限 LibTorch 原生定义的模块）。PyTorch 中是因为在 `__call__()` 函数中调用了 `forward()` ,LibTorch 是因为重写了运算符 `()` 相关内容在 TORCH_MODULE_IMPL 和 ModuleHolder 中。
 
 
 ## 3. 多层感知机

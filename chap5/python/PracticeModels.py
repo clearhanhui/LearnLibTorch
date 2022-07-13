@@ -57,6 +57,7 @@ loss_fn = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
 for i in range(5):
+    loss = 0
     for x, y in train_loader:
         y_prob = model(x)
         loss = loss_fn(y_prob, y)
