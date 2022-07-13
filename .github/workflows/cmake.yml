@@ -36,9 +36,9 @@ jobs:
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
       run: |
         cmake -B ${{github.workspace}}/chap1/build -S ${{github.workspace}}/chap1 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_PREFIX_PATH=/libtorch
-        cmake -B ${{github.workspace}}/chap2/build -S ${{github.workspace}}/chap1 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_PREFIX_PATH=/libtorch
-        cmake -B ${{github.workspace}}/chap3/build -S ${{github.workspace}}/chap1 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_PREFIX_PATH=/libtorch
-        cmake -B ${{github.workspace}}/chap4/build -S ${{github.workspace}}/chap1 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_PREFIX_PATH=/libtorch
+        cmake -B ${{github.workspace}}/chap2/build -S ${{github.workspace}}/chap2 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_PREFIX_PATH=/libtorch
+        cmake -B ${{github.workspace}}/chap3/build -S ${{github.workspace}}/chap3 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_PREFIX_PATH=/libtorch
+        cmake -B ${{github.workspace}}/chap4/build -S ${{github.workspace}}/chap4 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_PREFIX_PATH=/libtorch
         
     - name: Build
       # Build your program with the given configuration
