@@ -1,4 +1,13 @@
-from sklearn.model_selection import cross_val_predict
+# !/usr/bin/env python
+# -*- encoding: utf-8 -*-
+'''
+@File    :   Lenet5MNIST.py
+@Time    :   2022/07/13
+@Author  :   Han Hui
+@Contact :   clearhanhui@gmail.com
+'''
+
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -32,7 +41,8 @@ train_dataset = torchvision.datasets.MNIST(root='../data/',
 
 test_dataset = torchvision.datasets.MNIST(root='../data/',
                                           train=False,
-                                          transform=transforms.ToTensor())
+                                          transform=transforms.ToTensor(),
+                                          download=True)
 
 train_loader = torch.utils.data.DataLoader(dataset=train_dataset,
                                            batch_size=128,

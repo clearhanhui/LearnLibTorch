@@ -13,7 +13,7 @@
 
 ## 1. 创建张量
 
-和 PyTorch 相比不能说一模一样，只能说极为相似。
+大部分接口的用法和 PyTorch 相比可以说极为相似，唯一需要注意就是用 `{}` 代替 `()` 作为参数 `size` 的输入。
 
 ```cpp
 torch::Tensor a = torch::zeros({2, 3});
@@ -39,7 +39,7 @@ torch::Tensor f = a.index_select(-1, torch::tensor({1, 1, 0}));
 ```
 
 ## 3. 张量属性
-除了 `shape` 属性变味了 `sizes()` 函数，item其余常用的基本上和 PyTorch 一致。
+除了 `shape` 属性（或者 `size()` 函数）变为了 `sizes()` 函数，其余常用的基本上和 PyTorch 一致。
 ```cpp
 torch::Tensor a = torch::randn({2, 3});
 std::cout << a.size(1) << std::endl;
@@ -53,7 +53,7 @@ std::cout << a.device() << std::endl;
 
 ## 4. 张量变换
 
-不支持形如 Tensor.T 的操作，另外 `transpose()` 函数的用法也与 python 稍有区别。
+不支持形如 `.T` 的操作，另外 `transpose()` 函数的用法也与 PyTorch 稍有区别，但是都支持 `.t()`。
 ```cpp
 torch::Tensor a = torch::randn({2, 3});
 torch::Tensor b = a.transpose(0, 1);
