@@ -1,4 +1,4 @@
-name: CMake
+name: Test Every Chapter
 
 on:
   push:
@@ -65,11 +65,4 @@ jobs:
         ${{github.workspace}}/chap3/build/AutoGrad
         ${{github.workspace}}/chap4/build/BasicModels
         ${{github.workspace}}/chap5/build/PracticeModels
-
-    # - name: Test
-    #   working-directory: ${{github.workspace}}/build
-    #   # Execute tests defined by the CMake configuration.  
-    #   # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
-    #   run: ctest -C ${{env.BUILD_TYPE}}
-      
 

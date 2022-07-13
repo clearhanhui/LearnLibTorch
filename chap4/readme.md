@@ -7,6 +7,7 @@
   
 
 # 基本模型
+
 这一章介绍几种使用 LibTorch 和 C++ 实现的基础模型，其实大部分的操作和 PyTorch 相比来说都是很相似的。
 
 > torch::nn::Module 的第一句注释：The design and implementation of this class is largely based on the Python API.
@@ -53,6 +54,7 @@ for (int i = 0; i < 10; i++) {
 ```
 
 在默认情况下 `torch::nn::Linear` 附带 `bias`，如果不需要可以用对应的 `(ModuleName)Options` 类，在卷积网络中也有同样的设置。
+
 ```cpp
 torch::nn::Linear lin_no_bias(torch::nn::LinearOptions(2,1).bias(false));
 ```
@@ -65,6 +67,7 @@ torch::nn::Linear lin_no_bias(torch::nn::LinearOptions(2,1).bias(false));
 ## 3. 多层感知机
 
 多层感知机 MLP 的结构设计如下：
+
 ```
 (lin1): Linear(2, 4)
 (relu): ReLU()
@@ -137,9 +140,11 @@ target_link_libraries(BasicModels ${TORCH_LIBRARIES} libchap4)
 
 训练过程基本和 [2.](#2-线性回归) 中一致。
 
+
 ## 4. 卷积网络
 
 卷积网络 CNN 的结构设计如下， 主要包含两层 3 $\times$ 3 卷积层和一层线性变换层。每层卷积层之后一次执行归一、池化、激活的操作，由于他们没有科学系参数，只需定义一个即可，也可以用 `torch::nn::functional` 中对应的函数。
+
 ```
 (conv1): Conv2d(1, 16, kernel_size=(3, 3), padding=(1, 1))
 (bn): BatchNorm2d(16)

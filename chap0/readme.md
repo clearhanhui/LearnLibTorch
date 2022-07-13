@@ -1,5 +1,5 @@
 - [LibTorch 配置](#libtorch-配置)
-  - [1. 软件环境](#1-软件环境)
+  - [1. 必要软件](#1-必要软件)
   - [2. 安装 PyTorch](#2-安装-pytorch)
   - [3. 下载解压 LibTorch](#3-下载解压-libtorch)
   - [4. 配置环境](#4-配置环境)
@@ -7,10 +7,12 @@
 
 # LibTorch 配置
 
-## 1. 软件环境
+## 1. 必要软件
 
-* libtorch
-* python
+* wget
+* unzip
+* python3
+* pip3
 * cmake
 * gcc (or clang)
 * make (or ninja)
@@ -45,10 +47,10 @@ unzip libtorch-shared-with-deps-latest.zip
 
 ```bash
 # 临时使用
-export PATH="/path/to/libtorch:$PATH"
+export PATH=/path/to/libtorch:$PATH
 
 # 永久使用
-echo "export PATH=\"/path/to/libtorch:\$PATH\"" >> ~/.bashrc && . ~/.bashrc
+echo "export PATH=/path/to/libtorch:\$PATH" >> ~/.bashrc && . ~/.bashrc
 ```
 
 2. 设置环境变量 `Torch_ROOT`，方法参考上面。
@@ -56,6 +58,7 @@ echo "export PATH=\"/path/to/libtorch:\$PATH\"" >> ~/.bashrc && . ~/.bashrc
 4. 执行 `cmake` 命令的时候，设置参数 `-DCMAKE_PREFIX_PATH=/path/to/libtorch`。
 
 推荐使用第2种。
+
 
 ## 5. 运行 demo
 

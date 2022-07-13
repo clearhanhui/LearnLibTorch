@@ -2,12 +2,15 @@
 # 模型实践
 这里复现两个模型，分别是 Lecun Yann 的 Lenet5 和 Thomas Kipf 的 GCN 。
 
-## Lenet5
+
+## 1. Lenet5
+
 1. 首先准备数据集
+
 ```bash
 
 ```
-## GCN
+## 2. GCN
 
 PyTorch:    Test Accuracy = 98.76 %
 LibTorch:   

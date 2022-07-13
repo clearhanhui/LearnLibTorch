@@ -46,6 +46,7 @@ int main() {
 ## 3. 编译运行
 
 依次执行下列命令
+
 ```bash
 mkdir build && cd build
 cmake .. 
@@ -54,6 +55,7 @@ make
 ```
 
 输出如下：
+
 ```
  0  0  0
  0  0  0

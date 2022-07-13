@@ -27,7 +27,7 @@ torch::Tensor g = torch::tensor({{1, 2}, {3, 4}});
 
 
 ## 2. 张量索引和切片
-张量支持运算符 `[]` 但是不能如 `[i,j,k]` 这样使用。如果想要更加灵活的切片需要使用 `torch::indexing` 空间中的相关类如 `Slice`。`Slice(None)` 类似 Numpy 中的 `:` 或 `...` 操作符。
+张量支持运算符 `[]` 但是不能如 `[i,j,k]` 这样使用。如果想要更加灵活的切片需要使用 `torch::indexing` 空间中的相关类如 `Slice`。`Slice(None)` 类似 Numpy 中的 `:` 或 `...` 操作符，表示所有。
 
 ```cpp
 torch::Tensor a = torch::randn({2, 3, 4});
@@ -38,8 +38,11 @@ torch::Tensor e = a.index({Slice(None), Slice(None), Slice(None, None, 2)});
 torch::Tensor f = a.index_select(-1, torch::tensor({1, 1, 0}));
 ```
 
+
 ## 3. 张量属性
-除了 `shape` 属性（或者 `size()` 函数）变为了 `sizes()` 函数，其余常用的基本上和 PyTorch 一致。
+
+获取张量属性的方法，除了 `shape` 属性（或者 `size()` 函数）变为了 `sizes()` 函数，其余常用的基本上和 PyTorch 一致。
+
 ```cpp
 torch::Tensor a = torch::randn({2, 3});
 std::cout << a.size(1) << std::endl;
@@ -51,9 +54,11 @@ std::cout << a.dtype() << std::endl;
 std::cout << a.device() << std::endl;
 ```
 
+
 ## 4. 张量变换
 
 不支持形如 `.T` 的操作，另外 `transpose()` 函数的用法也与 PyTorch 稍有区别，但是都支持 `.t()`。
+
 ```cpp
 torch::Tensor a = torch::randn({2, 3});
 torch::Tensor b = a.transpose(0, 1);
@@ -62,9 +67,11 @@ torch::Tensor d = a.view({3, 2});
 torch::Tensor e = a.toType(torch::kFloat32);
 ```
 
+
 ## 5. 张量计算
 
-基本与 PyTorch 一致。
+各种常见的 API 用法基本与 PyTorch 一致。
+
 ```cpp
 torch::Tensor a = torch::ones({3, 3});
 torch::Tensor b = torch::randn({3, 3});
@@ -74,7 +81,10 @@ torch::Tensor e = torch::cat({a, b}, 0);
 torch::Tensor f = torch::stack({a, b});
 ```
 
+
 ## 6. CUDA
 留坑。
 
-LibTorch 大部分 api 和 PyTorch 都基本一致，稍加熟悉就可以了。
+-----------
+
+LibTorch 大部分 API 和 PyTorch 命名和使用逻辑都基本一致，稍加熟悉就可以了。

@@ -18,11 +18,12 @@
 * [2--张量基础](./chap2/)
 * [3--自动微分](./chap3/)
 * [4--基本模型](./chap4/)
+* [5--模型实践](./chap5/)
 
 
 ## 软件环境
 
-详细的环境配置可以参考[这里](./chap0/)。
+必要的软件和详细的环境配置可以参考[这里](./chap0/)。
 
 
 ----------------
@@ -30,8 +31,8 @@
 
 如有 bug 欢迎 [issue](https://github.com/clearhanhui/LearnLibTorch/issues)，喜欢的话给个免费的 star 。
 
-如果大家对 LibTorch 在 CV 的应用感兴趣可以去看 AllentDan 大佬的 Libtorch 系列
-[https://github.com/AllentDan/LibtorchTutorials](https://github.com/AllentDan/LibtorchTutorials)
-[https://github.com/AllentDan/LibtorchDetection](https://github.com/AllentDan/LibtorchDetection)
-[https://github.com/AllentDan/LibtorchSegmentation](https://github.com/AllentDan/LibtorchSegmentation)
+对 LibTorch 在 CV 的应用感兴趣可以去看 AllentDan 大佬的 Libtorch 系列，我也从中学习到很多。
+* [https://github.com/AllentDan/LibtorchTutorials](https://github.com/AllentDan/LibtorchTutorials)
+* [https://github.com/AllentDan/LibtorchDetection](https://github.com/AllentDan/LibtorchDetection)
+* [https://github.com/AllentDan/LibtorchSegmentation](https://github.com/AllentDan/LibtorchSegmentation)
 
