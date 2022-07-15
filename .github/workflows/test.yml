@@ -21,6 +21,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Debugging with tmate
+      uses: mxschmitt/action-tmate@v3.11
+
     - name: Install essential lib
       run: |
         wget -q https://download.pytorch.org/libtorch/nightly/cpu/libtorch-shared-with-deps-latest.zip

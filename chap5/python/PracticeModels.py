@@ -69,8 +69,8 @@ for i in range(5):
         
     print("Epoch [{:0>2d}]  total_loss = {:.4f}".format(i, total_loss))
 
-torch.save(lenet5.state_dict(), 'lenet5.pt')
-lenet5.load_state_dict(torch.load('lenet5.pt'))
+# torch.save(lenet5.state_dict(), 'lenet5.pt')
+# lenet5.load_state_dict(torch.load('lenet5.pt'))
 lenet5.eval()
 
 correct = 0

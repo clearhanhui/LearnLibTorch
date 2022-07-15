@@ -31,7 +31,7 @@
 
 如有 bug 欢迎 [issue](https://github.com/clearhanhui/LearnLibTorch/issues)，喜欢的话给个免费的 star 。
 
-对 LibTorch 在 CV 的应用感兴趣可以去看 AllentDan 大佬的 Libtorch 系列，我也从中学习到很多。
+对在 CV 的应用 LibTorch 感兴趣可以去看 AllentDan 大佬的 LibTorch 系列，我也从中学习到很多。
 * [https://github.com/AllentDan/LibtorchTutorials](https://github.com/AllentDan/LibtorchTutorials)
 * [https://github.com/AllentDan/LibtorchDetection](https://github.com/AllentDan/LibtorchDetection)
 * [https://github.com/AllentDan/LibtorchSegmentation](https://github.com/AllentDan/LibtorchSegmentation)
