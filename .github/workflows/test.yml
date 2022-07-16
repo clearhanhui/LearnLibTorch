@@ -1,4 +1,4 @@
-name: Test Every Chapter
+name: Test_Every_Chapter
 
 on:
   push:
@@ -7,65 +7,73 @@ on:
     branches: [ "main" ]
 
 env:
-  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
 
 jobs:
-  build:
-    # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
-    # You can convert this to a matrix build if you need cross-platform coverage.
-    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+  setup:
     runs-on: ubuntu-latest
-
-
     steps:
-    - uses: actions/checkout@v3
-
-    - name: Debugging with tmate
-      uses: mxschmitt/action-tmate@v3.11
-
-    - name: Install essential lib
-      run: |
+      - uses: actions/checkout@v3
+      - run: |
         wget -q https://download.pytorch.org/libtorch/nightly/cpu/libtorch-shared-with-deps-latest.zip
         unzip -q libtorch-shared-with-deps-latest.zip
         sudo mv libtorch /
         export Torch_ROOT=/libtorch
         python3 -m pip -q install torch torchvision
 
+  run_chap1:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - run: |
+        cmake -B ./chap1/build -S ./chap1 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_PREFIX_PATH=/libtorch
+        cmake --build ./chap1/build --config ${{env.BUILD_TYPE}}
+        python3 ./chap1/python/HelloWorld.py
+        ./chap1/build/HelloWorld
 
 
-    - name: Configure CMake
-      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
-      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
-      run: |
-        cmake -B ${{github.workspace}}/chap1/build -S ${{github.workspace}}/chap1 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_PREFIX_PATH=/libtorch
-        cmake -B ${{github.workspace}}/chap2/build -S ${{github.workspace}}/chap2 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_PREFIX_PATH=/libtorch
-        cmake -B ${{github.workspace}}/chap3/build -S ${{github.workspace}}/chap3 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_PREFIX_PATH=/libtorch
-        cmake -B ${{github.workspace}}/chap4/build -S ${{github.workspace}}/chap4 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_PREFIX_PATH=/libtorch
-        cmake -B ${{github.workspace}}/chap5/build -S ${{github.workspace}}/chap5 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_PREFIX_PATH=/libtorch
-        
-    - name: Build
-      # Build your program with the given configuration
-      run: |
-        cmake --build ${{github.workspace}}/chap1/build --config ${{env.BUILD_TYPE}}
-        cmake --build ${{github.workspace}}/chap2/build --config ${{env.BUILD_TYPE}}
-        cmake --build ${{github.workspace}}/chap3/build --config ${{env.BUILD_TYPE}}
-        cmake --build ${{github.workspace}}/chap4/build --config ${{env.BUILD_TYPE}}
-        cmake --build ${{github.workspace}}/chap5/build --config ${{env.BUILD_TYPE}}
+  run_chap2:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - run: |
+        cmake -B ./chap2/build -S ./chap2 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_PREFIX_PATH=/libtorch
+        cmake --build ./chap2/build --config ${{env.BUILD_TYPE}}
+        python3 ./chap2/python/TensorBasics.py
+        ./chap2/build/TensorBasics
 
-    - name: Run python
-      run: |
-        python3 ${{github.workspace}}/chap1/python/HelloWorld.py
-        python3 ${{github.workspace}}/chap2/python/TensorBasics.py
-        python3 ${{github.workspace}}/chap3/python/AutoGrad.py
-        python3 ${{github.workspace}}/chap4/python/BasicModels.py
-        python3 ${{github.workspace}}/chap5/python/PracticeModels.py
-    
-    - name: Run cpp
-      run: |
-        ${{github.workspace}}/chap1/build/HelloWorld
-        ${{github.workspace}}/chap2/build/TensorBasics
-        ${{github.workspace}}/chap3/build/AutoGrad
-        ${{github.workspace}}/chap4/build/BasicModels
-        ${{github.workspace}}/chap5/build/PracticeModels
+
+  run_chap3:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - run: |
+        cmake -B ./chap3/build -S ./chap3 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_PREFIX_PATH=/libtorch
+        cmake --build ./chap3/build --config ${{env.BUILD_TYPE}}
+        python3 ./chap3/python/AutoGrad.py
+        ./chap3/build/AutoGrad
+
+
+  run_chap4:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - run: |
+        cmake -B ./chap4/build -S ./chap4 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_PREFIX_PATH=/libtorch
+        cmake --build ./chap4/build --config ${{env.BUILD_TYPE}}
+        python3 ./chap4/python/BasicModels.py
+        ./chap4/build/BasicModels
+
+
+  run_chap5:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - run: |
+        cmake -B ./chap5/build -S ./chap5 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_PREFIX_PATH=/libtorch
+        cmake --build ./chap5/build --config ${{env.BUILD_TYPE}}
+        python3 ./chap5/python/PracticeModels.py
+        cd ./chap5/build
+        ./PracticeModels
+        cd ../../
 

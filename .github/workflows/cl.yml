@@ -1,0 +1,12 @@
+name: Commline Line
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Debugging with tmate
+      uses: mxschmitt/action-tmate@v3.11

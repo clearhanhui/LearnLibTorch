@@ -9,6 +9,8 @@
 #include <iostream>
 
 int main() {
+  /// 下面是 LibTorch 的官方注释，另外需要注意运行的目录
+  /// c++我还没有找到一种能优雅的够获取当前绝对路径的方法
   /// The supplied `root` path should contain the *content* of the unzipped
   /// MNIST dataset, available from http://yann.lecun.com/exdb/mnist.
   auto train_dataset =
