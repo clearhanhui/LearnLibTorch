@@ -40,7 +40,8 @@ jobs:
         cmake -B ${{github.workspace}}/chap3/build -S ${{github.workspace}}/chap3 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_PREFIX_PATH=/libtorch
         cmake -B ${{github.workspace}}/chap4/build -S ${{github.workspace}}/chap4 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_PREFIX_PATH=/libtorch
         cmake -B ${{github.workspace}}/chap5/build -S ${{github.workspace}}/chap5 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_PREFIX_PATH=/libtorch
-        
+        cmake -B ${{github.workspace}}/chap6/build -S ${{github.workspace}}/chap6 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_PREFIX_PATH=/libtorch
+
     - name: Build
       # Build your program with the given configuration
       run: |
@@ -49,6 +50,7 @@ jobs:
         cmake --build ${{github.workspace}}/chap3/build --config ${{env.BUILD_TYPE}}
         cmake --build ${{github.workspace}}/chap4/build --config ${{env.BUILD_TYPE}}
         cmake --build ${{github.workspace}}/chap5/build --config ${{env.BUILD_TYPE}}
+        cmake --build ${{github.workspace}}/chap6/build --config ${{env.BUILD_TYPE}}
 
     - name: Run python
       run: |
@@ -57,7 +59,8 @@ jobs:
         python3 ${{github.workspace}}/chap3/python/AutoGrad.py
         python3 ${{github.workspace}}/chap4/python/BasicModels.py
         python3 ${{github.workspace}}/chap5/python/PracticeModels.py
-    
+        python3 ${{github.workspace}}/chap6/python/export_model.py
+
     - name: Run cpp
       run: |
         ${{github.workspace}}/chap1/build/HelloWorld
@@ -66,4 +69,7 @@ jobs:
         ${{github.workspace}}/chap4/build/BasicModels
         cd ${{github.workspace}}/chap5/build/
         ./PracticeModels
+        cd ${{github.workspace}}
+        cd ${{github.workspace}}/chap6/build/
+        ./TorchScript
         cd ${{github.workspace}}

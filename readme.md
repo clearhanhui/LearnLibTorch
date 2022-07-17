@@ -7,9 +7,15 @@
 #  LibTorch 教程 
 
 ## 简介
-网上关于 LibTorch 的中文教程和资料太少了，最近也要用到就好好学习总结下。
 
-每个目录是独立一个 [CMake](https://cmake.org/) 项目，项目的主要参考内容是 [PyTorch 官方文档](https://pytorch.org/docs/stable/index.html)和网上的一些中英文博客资料。
+LibTorch 是什么呢，在其[设计哲学](https://pytorch.org/cppdocs/frontend.html#philosophy)中提到
+
+> PyTorch’s C++ frontend was designed with the idea that the Python frontend is great, and should be used when possible; but in some settings, performance and portability requirements make the use of the Python interpreter infeasible. 
+
+简单来说，它是 PyTorch 的 C++ 前端，可以提供更高的效率。然而网上关于 LibTorch 的中文教程和资料太少了，最近也要用到就好好学习总结下。
+
+
+每个目录是独立一个 [CMake](https://cmake.org/) 项目，项目的主要参考内容是 [LibTorch 官方文档](https://pytorch.org/cppdocs/)和网上的一些中英文博客资料。
 
 
 ## 目录
