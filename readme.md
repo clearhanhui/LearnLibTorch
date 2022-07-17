@@ -14,8 +14,7 @@ LibTorch 是什么呢，在其[设计哲学](https://pytorch.org/cppdocs/fronten
 
 简单来说，它是 PyTorch 的 C++ 前端，可以提供更高的效率。然而网上关于 LibTorch 的中文教程和资料太少了，最近也要用到就好好学习总结下。
 
-
-每个目录是独立一个 [CMake](https://cmake.org/) 项目，项目的主要参考内容是 [LibTorch 官方文档](https://pytorch.org/cppdocs/)和网上的一些中英文博客资料。
+本教程每个目录是独立一个 [CMake](https://cmake.org/) 项目，每个项目主要参考内容是 [LibTorch 官方文档](https://pytorch.org/cppdocs/)和网上的一些中英文博客资料。
 
 
 ## 目录
@@ -25,7 +24,7 @@ LibTorch 是什么呢，在其[设计哲学](https://pytorch.org/cppdocs/fronten
 * [3--自动微分](./chap3/)
 * [4--基本模型](./chap4/)
 * [5--模型实践](./chap5/)
-
+* [6--TorchScript](./chap6/)
 
 ## 软件环境
 
