@@ -8,11 +8,11 @@
 
 ## 简介
 
-LibTorch 是什么呢，在其[设计哲学](https://pytorch.org/cppdocs/frontend.html#philosophy)中提到
+LibTorch 是什么呢，简单来讲可以认为它提供了一种 c++ 前端（同理 PyTorch 是一种 python 前端）。在其[设计哲学](https://pytorch.org/cppdocs/frontend.html#philosophy)中提到
 
 > PyTorch’s C++ frontend was designed with the idea that the Python frontend is great, and should be used when possible; but in some settings, performance and portability requirements make the use of the Python interpreter infeasible. 
 
-简单来说，它是 PyTorch 的 C++ 前端，可以提供更高的效率。然而网上关于 LibTorch 的中文教程和资料太少了，最近也要用到就好好学习总结下。
+简单来说它可以提供更高的效率，此外由于在部署和拓展上面也可以和 PyTorch 很好的结合。然而网上关于 LibTorch 的中文教程和资料太少了，最近也要用到就好好学习总结下。
 
 本教程每个目录是独立一个 [CMake](https://cmake.org/) 项目，每个项目主要参考内容是 [LibTorch 官方文档](https://pytorch.org/cppdocs/)和网上的一些中英文博客资料。
 

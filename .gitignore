@@ -1,3 +1,4 @@
 build
 .vscode
-*/data/
+chap5/data/cora
+chap5/data/MNIST

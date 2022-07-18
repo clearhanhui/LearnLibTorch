@@ -1,5 +1,5 @@
-# !/usr/bin/env python
-# -*- encoding: utf-8 -*-
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 '''
 @File    :   CreateTensor.py
 @Time    :   2022/07/06
