@@ -8,6 +8,7 @@
 '''
 
 
+from torch.autograd import gradcheck
 import torch
 import torch.nn as nn
 from torch.autograd.function import Function
@@ -39,9 +40,9 @@ class LinearFunction(Function):
 
 
 linear = LinearFunction.apply
-from torch.autograd import gradcheck
 
-input = (torch.randn(20,20,dtype=torch.double,requires_grad=True), torch.randn(30,20,dtype=torch.double,requires_grad=True))
+input = (torch.randn(20, 20, dtype=torch.double, requires_grad=True),
+         torch.randn(30, 20, dtype=torch.double, requires_grad=True))
 test = gradcheck(linear, input, eps=1e-6, atol=1e-4)
 print(test)
 
@@ -52,12 +53,12 @@ class Linear(nn.Module):
         self.input_features = input_features
         self.output_features = output_features
 
-        self.weight = nn.Parameter(torch.empty(output_features, input_features))
+        self.weight = nn.Parameter(
+            torch.empty(output_features, input_features))
         if bias:
             self.bias = nn.Parameter(torch.empty(output_features))
         else:
             self.register_parameter('bias', None)
-
 
         nn.init.uniform_(self.weight, -0.1, 0.1)
         if self.bias is not None:
@@ -71,11 +72,11 @@ class Linear(nn.Module):
             self.input_features, self.output_features, self.bias is not None
         )
 
-lin = Linear(2,3)
-x = torch.randn((4,2))
-x.backward()
+
+lin = Linear(2, 3)
+x = torch.randn((4, 2))
 y = lin(x)
-y.backward(gradient = torch.ones_like(y))
+y.backward(gradient=torch.ones_like(y))
 print(x)
 print(y.shape)
 print(lin.weight.grad)
@@ -85,14 +86,30 @@ class GCNLayerFunction(Function):
 
     @staticmethod
     def forward(ctx, a, x, w, b):
-        ctx.sava_for_backward(a, x, w, b)
-        output = torch.spmm(a, torch.mm(x, w)) + b
+        ctx.save_for_backward(a, x, w, b)
+        output = a.mm(x).mm(w.t()) + b
         return output
 
     @staticmethod
     def backward(ctx, grad_output):
         a, x, w, b = ctx.saved_tensors
         grada = gradx = gradw = gradb = None
-        gradw = grad_output.t().mm(torch.spmm(a,x))
+        gradw = grad_output.t().mm(a.mm(x))
         gradb = grad_output.sum(0)
         return grada, gradx, gradw, gradb
+
+
+gc = GCNLayerFunction.apply
+
+a = torch.randn((3, 3), dtype=torch.double, requires_grad=True)
+x = torch.randn((3, 2), dtype=torch.double, requires_grad=True)
+w = torch.randn((4, 2), dtype=torch.double, requires_grad=True)
+b = torch.randn(4, dtype=torch.double, requires_grad=True)
+
+# BUG
+# test = gradcheck(gc, (a, x, w, b), eps=1e-6, atol=1e-4)
+# print(test)
+
+gc_out = gc(a,x,w,b).sum()
+gc_out.backward()
+print(a.grad, x.grad, w.grad, b.grad, )

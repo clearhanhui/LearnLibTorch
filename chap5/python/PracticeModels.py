@@ -89,7 +89,7 @@ def train_lenet5():
     print('Test Accuracy = {:.2f} %'.format(100 * correct / total))
 
 
-class GCN_Layer(nn.Module):
+class GCNLayer(nn.Module):
     def __init__(self, in_features, out_features):
         super().__init__()
         w = torch.empty(in_features, out_features)
@@ -99,8 +99,10 @@ class GCN_Layer(nn.Module):
         b.uniform_(-stdv, stdv)
         self.w = Parameter(w)
         self.b = Parameter(b)
-        # self.w = Parameter(nn.init.trunc_normal_(torch.empty(in_features, out_features), std=0.05))
-        # self.b = Parameter(nn.init.trunc_normal_(torch.empty(out_features), std=0.05))
+        # self.w = Parameter(nn.init.trunc_normal_(
+        #     torch.empty(in_features, out_features), std=0.05))
+        # self.b = Parameter(nn.init.trunc_normal_(
+        #     torch.empty(out_features), std=0.05))
 
     def forward(self, x, a):
         out = torch.spmm(a, torch.mm(x, self.w)) + self.b
@@ -111,8 +113,8 @@ class GCN_Layer(nn.Module):
 class GCN(nn.Module):
     def __init__(self):
         super().__init__()
-        self.gc1 = GCN_Layer(1433, 16)
-        self.gc2 = GCN_Layer(16, 7)
+        self.gc1 = GCNLayer(1433, 16)
+        self.gc2 = GCNLayer(16, 7)
         self.dropout = nn.Dropout(0.5)
 
     def forward(self, x, a):
@@ -135,10 +137,11 @@ def train_gcn():
         loss.backward()
         adam.step()
         print("Epoch [{:0>3d}]  loss={:.4f} train_acc={:.2f}% val_acc={:.2f}%"
-              .format(i, loss.item(), 100*accuracy(y_prob[idx_train], y[idx_train]), 
-                                      100*accuracy(y_prob[idx_val], y[idx_val])))
+              .format(i, loss.item(), 100*accuracy(y_prob[idx_train], y[idx_train]),
+                      100*accuracy(y_prob[idx_val], y[idx_val])))
     y_prob = gcn(x, a)
-    print("test_acc={:.2f}%".format(100*accuracy(y_prob[idx_test], y[idx_test])))
+    print("test_acc={:.2f}%".format(
+        100*accuracy(y_prob[idx_test], y[idx_test])))
 
 
 if __name__ == "__main__":

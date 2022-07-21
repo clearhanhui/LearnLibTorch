@@ -136,7 +136,7 @@ jobs:
         unzip -q libtorch-shared-with-deps-latest.zip
         sudo mv libtorch /
         export Torch_ROOT=/libtorch
-        python3 -m pip -q install torch torchvision
+        python3 -m pip -q install torch torchvision scipy
         cd ${{github.workspace}}/chap5/data
         bash prepare_cora.sh
         cd ${{github.workspace}}
