@@ -191,7 +191,7 @@ jobs:
         ./TorchScript
         cd ${{github.workspace}}
 
-    chap7:
+  chap7:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -209,7 +209,7 @@ jobs:
         python3 check_profile.py
 
 
-    chap8:
+  chap8:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3

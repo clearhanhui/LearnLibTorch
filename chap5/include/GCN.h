@@ -19,7 +19,7 @@ private:
   torch::Tensor w;
   torch::Tensor b;
 };
-TORCH_MODULE(GCNLayer);
+TORCH_MODULE(GCNLayer); // 注册
 
 
 class GCN : public nn::Module {

@@ -76,7 +76,7 @@ torch::nn::Linear lin_no_bias(torch::nn::LinearOptions(2,1).bias(false));
 (lin3): Linear(4, 1)
 ```
 
-在 include 目录下创建两个文件 `MLP.h` 和 `MLP.cpp`，创建 `MLP` 类并实现构建函数和 `forward()`（其实套路和 PyTorch 也差不多）。
+在 [`include`](./include/) 目录下创建两个文件 `MLP.h` 和 `MLP.cpp`，创建 `MLP` 类并实现构建函数和 `forward()`（其实套路和 PyTorch 也差不多）。
 
 ```cpp
 // MLP.h
