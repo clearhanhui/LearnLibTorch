@@ -139,6 +139,7 @@ jobs:
         python3 -m pip -q install torch torchvision scipy
         cd ${{github.workspace}}/chap5/data
         bash prepare_cora.sh
+        bash prepare_mnist.sh
         cd ${{github.workspace}}
 
     - name: Configure CMake

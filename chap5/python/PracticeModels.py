@@ -146,5 +146,5 @@ def train_gcn():
 
 
 if __name__ == "__main__":
-    # train_lenet5()
+    train_lenet5()
     train_gcn()
