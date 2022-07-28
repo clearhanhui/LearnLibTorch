@@ -125,7 +125,8 @@ class GCN(nn.Module):
 
 
 def train_gcn():
-    a, x, y, idx_train, idx_val, idx_test = load_data()
+    datapath = sys.path[0] + "/../data/cora/"
+    a, x, y, idx_train, idx_val, idx_test = load_data(path=datapath)
     gcn = GCN()
     loss_fn = torch.nn.CrossEntropyLoss()
     adam = torch.optim.Adam(gcn.parameters(), lr=0.01, weight_decay=5e-4)
@@ -145,5 +146,5 @@ def train_gcn():
 
 
 if __name__ == "__main__":
-    train_lenet5()
+    # train_lenet5()
     train_gcn()
