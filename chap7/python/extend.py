@@ -8,18 +8,16 @@
 '''
 
 
-from torch.autograd import gradcheck
 import torch
 import torch.nn as nn
 from torch.autograd.function import Function
 
 
 class LinearFunction(Function):
-
     @staticmethod
     def forward(ctx, input, weight, bias=None):
         ctx.save_for_backward(input, weight, bias)
-        output = input.mm(weight.t())
+        output = input.mm(weight)
         if bias is not None:
             output += bias.unsqueeze(0).expand_as(output)
         return output
@@ -30,33 +28,25 @@ class LinearFunction(Function):
         grad_input = grad_weight = grad_bias = None
 
         if ctx.needs_input_grad[0]:
-            grad_input = grad_output.mm(weight)
+            grad_input = grad_output.mm(weight.t())
         if ctx.needs_input_grad[1]:
-            grad_weight = grad_output.t().mm(input)
+            grad_weight = input.t().mm(grad_output)
         if bias is not None and ctx.needs_input_grad[2]:
             grad_bias = grad_output.sum(0)
 
         return grad_input, grad_weight, grad_bias
 
 
-linear = LinearFunction.apply
-
-input = (torch.randn(20, 20, dtype=torch.double, requires_grad=True),
-         torch.randn(30, 20, dtype=torch.double, requires_grad=True))
-test = gradcheck(linear, input, eps=1e-6, atol=1e-4)
-print(test)
-
-
 class Linear(nn.Module):
-    def __init__(self, input_features, output_features, bias=True):
+    def __init__(self, in_features, out_features, bias=True):
         super(Linear, self).__init__()
-        self.input_features = input_features
-        self.output_features = output_features
+        self.in_features = in_features
+        self.out_features = out_features
 
         self.weight = nn.Parameter(
-            torch.empty(output_features, input_features))
+            torch.empty(in_features, out_features))
         if bias:
-            self.bias = nn.Parameter(torch.empty(output_features))
+            self.bias = nn.Parameter(torch.empty(out_features))
         else:
             self.register_parameter('bias', None)
 
@@ -68,48 +58,40 @@ class Linear(nn.Module):
         return LinearFunction.apply(input, self.weight, self.bias)
 
     def extra_repr(self):
-        return 'input_features={}, output_features={}, bias={}'.format(
-            self.input_features, self.output_features, self.bias is not None
+        return 'in_features={}, out_features={}, bias={}'.format(
+            self.in_features, self.out_features, self.bias is not None
         )
 
 
-lin = Linear(2, 3)
-x = torch.randn((4, 2))
-y = lin(x)
-y.backward(gradient=torch.ones_like(y))
-print(x)
-print(y.shape)
-print(lin.weight.grad)
-
-
 class GCNLayerFunction(Function):
-
     @staticmethod
     def forward(ctx, a, x, w, b):
         ctx.save_for_backward(a, x, w, b)
-        output = a.mm(x).mm(w.t()) + b
+        output = a.mm(x).mm(w) + b
         return output
 
     @staticmethod
     def backward(ctx, grad_output):
         a, x, w, b = ctx.saved_tensors
         grada = gradx = gradw = gradb = None
-        gradw = grad_output.t().mm(a.mm(x))
+        gradw = a.mm(x).t().mm(grad_output)
         gradb = grad_output.sum(0)
         return grada, gradx, gradw, gradb
 
 
-gc = GCNLayerFunction.apply
+class GCNLayer(nn.Module):
+    def __init__(self, in_features, out_features, bias=True):
+        super().__init__()
+        self.weight = nn.Parameter(
+            torch.empty(in_features, out_features))
+        if bias:
+            self.bias = nn.Parameter(torch.empty(out_features))
+        else:
+            self.register_parameter('bias', None)
 
-a = torch.randn((3, 3), dtype=torch.double, requires_grad=True)
-x = torch.randn((3, 2), dtype=torch.double, requires_grad=True)
-w = torch.randn((4, 2), dtype=torch.double, requires_grad=True)
-b = torch.randn(4, dtype=torch.double, requires_grad=True)
+        nn.init.uniform_(self.weight, -0.1, 0.1)
+        if self.bias is not None:
+            nn.init.uniform_(self.bias, -0.1, 0.1)
 
-# BUG
-# test = gradcheck(gc, (a, x, w, b), eps=1e-6, atol=1e-4)
-# print(test)
-
-gc_out = gc(a,x,w,b).sum()
-gc_out.backward()
-print(a.grad, x.grad, w.grad, b.grad, )
+    def forward(self, a, x):
+        return GCNLayerFunction.apply(a, x, self.weight, self.bias)

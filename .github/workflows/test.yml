@@ -190,3 +190,40 @@ jobs:
         cd ${{github.workspace}}/chap6/build/
         ./TorchScript
         cd ${{github.workspace}}
+
+    chap7:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install essential lib
+      run: |
+        wget -q https://download.pytorch.org/libtorch/nightly/cpu/libtorch-shared-with-deps-latest.zip
+        unzip -q libtorch-shared-with-deps-latest.zip
+        sudo mv libtorch /
+        export Torch_ROOT=/libtorch
+        python3 -m pip -q install torch torchvision
+
+    - name: Run python
+      run: |
+        cd ${{github.workspace}}/chap7
+        python3 check_profile.py
+
+
+    chap8:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install essential lib
+      run: |
+        wget -q https://download.pytorch.org/libtorch/nightly/cpu/libtorch-shared-with-deps-latest.zip
+        unzip -q libtorch-shared-with-deps-latest.zip
+        sudo mv libtorch /
+        export Torch_ROOT=/libtorch
+        python3 -m pip -q install torch torchvision
+
+    - name: Run python
+      run: |
+        cd ${{github.workspace}}/chap8
+        python3 check.py
+        
+
