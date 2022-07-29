@@ -24,7 +24,7 @@ def make_array(input_list, requires_grad=False):
     myarray = MyArray(nparray.shape)
     myarray[:] = nparray[:]
     if requires_grad:
-        myarray.is_leaf = True
+        myarray.requires_grad = True
     return myarray
 
 
@@ -61,7 +61,7 @@ class NodeBase:
     def _save_inputs(self, *args):
         for a in args:
             self._inputs.append(a)
-            if not hasattr(a, "is_leaf"):
+            if not hasattr(a, "requires_grad"):
                 self._edges.append(a.fn)
 
     def _save_outputs(self, *args):
@@ -150,7 +150,7 @@ class BackwardEngine:
     def __init__(self, arr):
         self._target_arr = arr
         self._root = arr.fn
-        self.topo_queue = []  # reversed topological sorted queue.
+        self.topo_queue = []
         self._topological_sorting()
 
     def _topological_sorting(self):
@@ -160,7 +160,7 @@ class BackwardEngine:
             node._depends += 1
             self.topo_queue.append(node)
         _dfs(self._root)
-        self.topo_queue[-1]._depends = 0
+        self._root._depends = 0
 
     def run_backward(self, gradient=None):
         # Following check codes are simulated to PyTorch
@@ -189,7 +189,7 @@ class BackwardEngine:
                     n._depends -= 1
 
 
-# Warp again, every time call the func will create an NODE instance.
+# Wrap again, every time call the func will create an NODE instance.
 def add(a, b):
     op = AddOP()
     return op(a, b)
