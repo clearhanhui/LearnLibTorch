@@ -205,7 +205,9 @@ jobs:
 
     - name: Run python
       run: |
-        cd ${{github.workspace}}/chap7
+        cd ${{github.workspace}}/chap7//csrc
+        python setup.py install
+        cd ..
         python3 check_profile.py
 
 

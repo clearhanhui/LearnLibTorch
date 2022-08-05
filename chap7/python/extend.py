@@ -9,10 +9,12 @@
 
 
 import torch
-import gc_cpp # must after `import torch`
 import torch.nn as nn
 from torch.autograd.function import Function
-
+try:
+    import gc_cpp # must after `import torch`
+except:
+    print("\nModule gc_cpp not installed.\n")
 
 class AddSelf(Function):
     @staticmethod
