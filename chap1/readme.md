@@ -1,9 +1,9 @@
-- [LibTorch HelloWorld](#libtorch-helloworld)
+- [HelloWorld](#helloworld)
   - [1. 创建 CMake 项目](#1-创建-cmake-项目)
   - [2. 编写 HelloWorld.cpp](#2-编写-helloworldcpp)
   - [3. 编译运行](#3-编译运行)
 
-# LibTorch HelloWorld
+# HelloWorld
 
 ## 1. 创建 CMake 项目
 

@@ -19,7 +19,7 @@ LibTorch 是什么呢，简单来讲可以认为它提供了一种 c++ 前端（
 
 ## 目录
 * [0--LibTorch 配置](./chap0/)
-* [1--LibTorch HelloWorld](./chap1/)
+* [1--HelloWorld](./chap1/)
 * [2--张量基础](./chap2/)
 * [3--自动微分（1）](./chap3/)
 * [4--基本模型](./chap4/)

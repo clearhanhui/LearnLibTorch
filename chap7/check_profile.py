@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 '''
-@File    :   check.py
+@File    :   check_profile.py
 @Time    :   2022/07/28
 @Author  :   Han Hui
 @Contact :   clearhanhui@gmail.com
@@ -13,7 +13,13 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.autograd import gradcheck
-from python.extend import GCNLayerFunction, LinearFunction, GCNLayer
+from python.extend import GCNLayerFunction, LinearFunction, GCNLayer, AddSelf
+
+
+addself = AddSelf.apply
+x = torch.randn(1, dtype=torch.double, requires_grad=True)
+y = addself(x)
+print(gradcheck(addself, x, eps=1e-6, atol=1e-4))
 
 
 linear = LinearFunction.apply
@@ -22,12 +28,13 @@ weight = torch.randn(20, 30, dtype=torch.double, requires_grad=True)
 print(gradcheck(linear, (input, weight), eps=1e-6, atol=1e-4))
 
 
+use_cpp = False
 gc = GCNLayerFunction.apply
 a = torch.randn((10, 10), dtype=torch.double)
 x = torch.randn((10, 20), dtype=torch.double)
 w = torch.randn((20, 30), dtype=torch.double, requires_grad=True)
 b = torch.randn(30, dtype=torch.double, requires_grad=True)
-print(gradcheck(gc, (a, x, w, b), eps=1e-6, atol=1e-4))
+print(gradcheck(gc, (a, x, w, b, use_cpp), eps=1e-6, atol=1e-4))
 
 
 class GCN(nn.Module):
@@ -38,9 +45,9 @@ class GCN(nn.Module):
         self.dropout = nn.Dropout(0.5)
 
     def forward(self, a, x):
-        x = F.relu(self.gc1(a, x))
+        x = F.relu(self.gc1(a, x, use_cpp))
         x = self.dropout(x)
-        x = self.gc2(a, x)
+        x = self.gc2(a, x, use_cpp)
         return x
 
 start_t = time.time()
@@ -58,4 +65,3 @@ for i in range(200):
     adam.step()
 end_t = time.time()
 print(end_t - start_t)
-

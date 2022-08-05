@@ -5,3 +5,5 @@ chap5/data/MNIST
 chap5/python/__pycache__
 chap7/python/__pycache__
 chap8/python/__pycache__
+chap7/csrc/dist/*
+chap7/csrc/gc_cpp.egg-info/*

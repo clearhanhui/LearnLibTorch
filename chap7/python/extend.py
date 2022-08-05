@@ -9,8 +9,20 @@
 
 
 import torch
+import gc_cpp # must after `import torch`
 import torch.nn as nn
 from torch.autograd.function import Function
+
+
+class AddSelf(Function):
+    @staticmethod
+    def forward(ctx, x, n=1):
+        ctx.n = n
+        return torch.mul(x, n)
+    
+    @staticmethod
+    def backward(ctx, gx):
+        return gx * ctx.n
 
 
 class LinearFunction(Function):
@@ -65,23 +77,25 @@ class Linear(nn.Module):
 
 class GCNLayerFunction(Function):
     @staticmethod
-    def forward(ctx, a, x, w, b):
+    def forward(ctx, a, x, w, b, use_cpp=False):
         ctx.save_for_backward(a, x, w, b)
-        output = a.mm(x).mm(w) + b
+        ctx.use_cpp = use_cpp
+        output = gc_cpp.forward(a,x,w,b) if use_cpp else a.mm(x).mm(w) + b
         return output
 
     @staticmethod
     def backward(ctx, grad_output):
         a, x, w, b = ctx.saved_tensors
-        grada = gradx = gradw = gradb = None
-        gradw = a.mm(x).t().mm(grad_output)
-        gradb = grad_output.sum(0)
-        return grada, gradx, gradw, gradb
+        grad_a = grad_x = grad_w = grad_b = grad_use_cpp = None
+        grad_w = gc_cpp.backward(a,x, grad_output) if ctx.use_cpp else a.mm(x).t().mm(grad_output)
+        grad_b = grad_output.sum(0)
+        return grad_a, grad_x, grad_w, grad_b, grad_use_cpp
 
 
 class GCNLayer(nn.Module):
     def __init__(self, in_features, out_features, bias=True):
         super().__init__()
+        a = torch.rand((2,3))
         self.weight = nn.Parameter(
             torch.empty(in_features, out_features))
         if bias:
@@ -93,5 +107,5 @@ class GCNLayer(nn.Module):
         if self.bias is not None:
             nn.init.uniform_(self.bias, -0.1, 0.1)
 
-    def forward(self, a, x):
-        return GCNLayerFunction.apply(a, x, self.weight, self.bias)
+    def forward(self, a, x, use_cpp=False):
+        return GCNLayerFunction.apply(a, x, self.weight, self.bias, use_cpp)
