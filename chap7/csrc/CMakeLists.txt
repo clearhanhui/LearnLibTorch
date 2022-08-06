@@ -3,6 +3,7 @@ project(lltm_cpp)
 
 
 
+## c++
 # find_package(Python3 COMPONENTS Development)
 # find_package(Torch REQUIRED)
 # add_library(lltm_cpp SHARED lltm.cpp)
@@ -10,7 +11,7 @@ project(lltm_cpp)
 # target_link_libraries(lltm_cpp ${TORCH_LIBRARIES} Python3::Python)
 
 
-## For py, while a bug exists.
+## python
 ## https://github.com/pytorch/pytorch/issues/38122
 find_package(pybind11 REQUIRED)
 find_package(Torch REQUIRED)

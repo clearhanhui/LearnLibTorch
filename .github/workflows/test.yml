@@ -205,8 +205,8 @@ jobs:
 
     - name: Run python
       run: |
-        cd ${{github.workspace}}/chap7//csrc
-        sudo python setup.py install
+        cd ${{github.workspace}}/chap7/csrc
+        sudo python3 setup.py install
         cd ..
         python3 check_profile.py
 
