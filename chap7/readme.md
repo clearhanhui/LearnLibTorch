@@ -27,7 +27,7 @@ PYBIND11_MODULE(gc_cpp, m) {
   m.def("backward", &gc_backward, "gc backward");
 }
 ```
-`PYBIND11_MODULE` 的第一个参数 `gc_cpp` 是我们后面需要 `import` 的包名，`m` 是一个 `library` 对象，`def` 的三个参数分别是暴露给 python 的函数名，函数的指针，和描述。关于宏 `PYBIND11_MODULE` 的详细文档可以看[这里](https://pybind11.readthedocs.io/en/stable/reference.html#c.PYBIND11_MODULE)。
+`PYBIND11_MODULE` 的第一个参数 `gc_cpp` 是我们后面需要 `import` 的包名，`m` 是一个 `library` 对象，`def` 的三个参数分别是暴露给 python 的函数名，函数的指针，和描述。关于宏 `PYBIND11_MODULE` 的详细文档可以看[官网描述](https://pybind11.readthedocs.io/en/stable/reference.html#c.PYBIND11_MODULE)。
 > 提一句，这个宏其实帮我们做了很多事情，如果不使用 PyBind11 的话，可以参考这两个文档：[链接1](https://docs.python.org/3/extending/extending.html)，[链接2](https://docs.microsoft.com/zh-cn/visualstudio/python/working-with-c-cpp-python-in-visual-studio?view=vs-2022#use-cpython-extensions)。当然这个除了封装函数，像类、属性、等都可以封装，这其实利用了就是 python 一切皆对象的特性。
 
 然后在同一个目录下创建 `setup.py` ，最简单的只需要这几行代码（对我提供的代码做了简化）：
