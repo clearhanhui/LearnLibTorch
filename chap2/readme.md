@@ -83,7 +83,18 @@ torch::Tensor f = torch::stack({a, b});
 
 
 ## 6. CUDA
-留坑。
+
+注意 `torch::randn` 的默认参数是 `size` 和 `options`，但是 `TensorOptions` 类支持从 `ScalarType`、`Device` 的隐式转换，所以这里可以编译通过，并不是重载了有 `device` 参数的函数。
+
+```cpp
+torch::Device device = torch::Device(torch::kCPU);
+if (torch::cuda::is_available()) {
+  device = torch::Device(torch::kCUDA);
+}
+torch::Tensor b = torch::randn({3, 3}).cuda();
+torch::Tensor a = torch::randn({3, 3}).to(device);
+torch::Tensor c = torch::randn({3, 3}, device);
+```
 
 -----------
 

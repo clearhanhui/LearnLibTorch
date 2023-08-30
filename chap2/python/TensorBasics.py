@@ -81,6 +81,16 @@ def tensor_calculate():
     print(e)
     print(f)
 
+# CUDA
+def tensor_cuda():
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    a = torch.randn((3,3)).cuda()
+    b = torch.randn((3,3)).to(device)
+    c = torch.randn((3,3), device=device) # more efficient
+    print(a)
+    print(b)
+    print(c)
+
 
 if __name__ == "__main__":
     tensor_init()
@@ -88,3 +98,4 @@ if __name__ == "__main__":
     tensor_attribute()
     tensor_transform()
     tensor_calculate()
+    tensor_cuda()

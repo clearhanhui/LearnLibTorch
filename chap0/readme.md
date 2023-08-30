@@ -18,6 +18,7 @@
 * make (or ninja)
 
 软件版本尽量用新的。
+根据 (issue)[https://github.com/clearhanhui/LearnLibTorch/issues/1] 的提醒，可能某些 LibTorch 版本使用了C++17语法，编译的时候加上 flag `-std=c++17`。
 
 
 ## 2. 安装 PyTorch
@@ -42,8 +43,8 @@ unzip libtorch-shared-with-deps-latest.zip
 
 ## 4. 配置环境
 
-三种方式（影响范围由大到小）：
-1. 将讲解压目录 `/path/to/libtorch`（注意替换）添加到系统 `PATH` 变量中：
+四种方式（影响范围由大到小）：
+1. 将解压目录 `/path/to/libtorch`（注意替换）添加到系统 `PATH` 变量中：
 
 ```bash
 # 临时使用

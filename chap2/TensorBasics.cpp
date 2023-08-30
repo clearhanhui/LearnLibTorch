@@ -10,6 +10,7 @@
 #include "include/TensorAttribute.h"
 #include "include/TensorTransform.h"
 #include "include/TensorCalculate.h"
+#include "include/TensorCuda.h"
 
 int main() {
   tensor_init();
@@ -17,6 +18,7 @@ int main() {
   tensor_attribute();
   tensor_transform();
   tensor_calculate();
+  tensor_cuda();
 
   return 0;
 }
