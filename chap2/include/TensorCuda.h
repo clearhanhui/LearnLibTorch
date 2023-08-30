@@ -13,11 +13,11 @@ void tensor_cuda() {
   if (torch::cuda::is_available()) {
     device = torch::Device(torch::kCUDA);
   }
-  torch::Tensor b = torch::randn({3, 3}).cuda();
-  torch::Tensor a = torch::randn({3, 3}).to(device);
+  // torch::Tensor a = torch::randn({3, 3}).cuda();
+  torch::Tensor b = torch::randn({3, 3}).to(device);
   torch::Tensor c = torch::randn({3, 3}, device); // 似乎是发生了 Device -> TensorOptions 的隐式转换
 
-  std::cout << a << std::endl;
+  // std::cout << a << std::endl;
   std::cout << b << std::endl;
   std::cout << c << std::endl;
 }

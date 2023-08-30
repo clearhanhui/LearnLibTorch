@@ -91,8 +91,8 @@ torch::Device device = torch::Device(torch::kCPU);
 if (torch::cuda::is_available()) {
   device = torch::Device(torch::kCUDA);
 }
-torch::Tensor b = torch::randn({3, 3}).cuda();
-torch::Tensor a = torch::randn({3, 3}).to(device);
+torch::Tensor a = torch::randn({3, 3}).cuda();
+torch::Tensor b = torch::randn({3, 3}).to(device);
 torch::Tensor c = torch::randn({3, 3}, device);
 ```
 
