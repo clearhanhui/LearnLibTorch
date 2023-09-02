@@ -9,9 +9,16 @@
 
 > 推荐直接使用 Docker 镜像：
 > ```shell
+> # cpu
 > docker pull clearhanhui/ubuntu-libtorch-cpu:latest
 > docker run -ti clearhanhui/ubuntu-libtorch-cpu /bin/bash
+> # cuda
+> docker pull clearhanhui/ubuntu-libtorch-cuda:latest
+> docker run -ti --gpus all clearhanhui/ubuntu-libtorch-cuda /bin/bash
 > ```
+> 注意1：由于 cuda 镜像使用的较新的版本，`docker run` 的时候可以增加 `NVIDIA_DISABLE_REQUIRE=1` 来禁止版本检查（[参考](https://github.com/NVIDIA/nvidia-docker/issues/1409#issuecomment-778089784)）。  
+> 注意2：仅学习推荐使用 cpu 版，依赖更少，文件更小。
+>
 
 ## 1. 必要软件
 
