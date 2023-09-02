@@ -7,15 +7,23 @@
 
 # LibTorch 配置
 
+> 推荐直接使用 Docker 镜像：
+> ```shell
+> docker pull clearhanhui/ubuntu-libtorch-cpu:latest
+> docker run -ti clearhanhui/ubuntu-libtorch-cpu /bin/bash
+> ```
+
 ## 1. 必要软件
 
 * wget
 * unzip
 * python3
 * pip3
+* git
 * cmake
 * gcc (or clang)
 * make (or ninja)
+* build-essential
 
 软件版本尽量用新的。
 根据 (issue)[https://github.com/clearhanhui/LearnLibTorch/issues/1] 的提醒，可能某些 LibTorch 版本使用了C++17语法，编译的时候加上 flag `-std=c++17`。

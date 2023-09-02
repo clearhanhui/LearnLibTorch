@@ -1,9 +1,9 @@
-- [自动微分（1）](#自动微分1)
+- [自动微分](#自动微分)
   - [1. 普通微分](#1-普通微分)
   - [2. vector-Jacobian product(vjp)](#2-vector-jacobian-productvjp)
 
 
-# 自动微分（1）
+# 自动微分
 
 
 ## 1. 普通微分
