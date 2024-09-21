@@ -40,8 +40,17 @@ LibTorch 是什么呢，简单来讲可以认为它提供了一种 c++ 前端（
 
 如有 bug 欢迎 [issue](https://github.com/clearhanhui/LearnLibTorch/issues)，喜欢的话给个免费的 star 。
 
+
 对在 CV 的应用 LibTorch 感兴趣可以去看 AllentDan 大佬的 LibTorch 系列，我也从中学习到很多。
 * [https://github.com/AllentDan/LibtorchTutorials](https://github.com/AllentDan/LibtorchTutorials)
 * [https://github.com/AllentDan/LibtorchDetection](https://github.com/AllentDan/LibtorchDetection)
 * [https://github.com/AllentDan/LibtorchSegmentation](https://github.com/AllentDan/LibtorchSegmentation)
 
+
+<a href="https://star-history.com/#clearhanhui/LearnLibTorch&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=clearhanhui/LearnLibTorch&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=clearhanhui/LearnLibTorch&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=clearhanhui/LearnLibTorch&type=Date" />
+ </picture>
+</a>
